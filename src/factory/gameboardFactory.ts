@@ -7,7 +7,7 @@ class Gameboard {
     // Logic of the board is to have a object matrix
     // hasShip -1 = no ship, 0-4 = what ship number
     // isShot false = not shot, true = shot
-    // isShot == true && hasShip == 0 = missed shot
+    // isShot == true && hasShip == -1 = missed shot
     board: IGameboard[][];
     ships: Ship[];
     constructor() {
@@ -25,6 +25,8 @@ class Gameboard {
     }
 
     placeShip(ship: Ship, x: number, y: number, horizontal: boolean) {
+        // Check in here if ship can be placed.
+        // x and y are numbers between 0 and 9.
         // first let do horizontal placement.
         if (horizontal) {
         for (let i = 0; i < ship.length; i++) {
