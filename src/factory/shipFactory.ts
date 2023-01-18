@@ -2,19 +2,24 @@
 class Ship {
   length: number;
   isSunk: boolean = false;
-  hits: number[] = [];
+  hits: number;
 
   constructor(length: number) {
     this.length = length;
+    this.hits = 0;
   }
-  hit(index: number): void {
-    if (!this.hits.includes(index)) {
-    this.hits.push(index);
-    }
+  hit(): void {
+    this.hits++;
     this.isSunk = this.checkIsSunk();
   }
   checkIsSunk(): boolean {
-    return this.hits.length === this.length;
+    return this.hits === this.length;
+  }
+  getShipHits(): number {
+    return this.hits;
+  }
+  getIsSunk(): boolean {
+    return this.isSunk;
   }
 }
 

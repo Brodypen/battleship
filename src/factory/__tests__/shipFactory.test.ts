@@ -16,22 +16,23 @@ describe("Ship testing", () => {
         expect(ship.isSunk).toBe(false);
     });
     test("Ship is sunk after all hits", () => {
-        ship.hit(0);
-        ship.hit(1);
-        ship.hit(2);
-        ship.hit(3);
-        expect(ship.isSunk).toBe(true);
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        ship.hit();
+        expect(ship.getIsSunk()).toBe(true);
     });
     test("Ship is not sunk after some hits", () => {
-        ship.hit(0);
-        ship.hit(1);
-        expect(ship.isSunk).toBe(false);
+        ship.hit();
+        ship.hit();
+        expect(ship.getIsSunk()).toBe(false);
     });
-    test("Ship cannot be hit twice", () => {
-        ship.hit(1);
-        ship.hit(1);
-        expect(ship.hits.length).toBe(1);
-    });
+    // This is being tested in gameboardFactory.test.ts.
+    // test("Ship cannot be hit twice", () => {
+    //     ship.hit(1);
+    //     ship.hit(1);
+    //     expect(ship.hits.length).toBe(1);
+    // });
 
 });
     
