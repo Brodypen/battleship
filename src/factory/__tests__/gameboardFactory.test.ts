@@ -64,16 +64,16 @@ describe("Gameboard testing", () => {
   // v2 test cases
   // Testing valid placement of ships
   test("Valid placement of ship", () => {
-    expect(gameboard.validPlacement(ship, 0, 0, true)).toBe(true);
+    expect(gameboard.isValidPlacement(ship, 0, 0, true)).toBe(true);
   });
   // test out of bounds placement
   test("Out of bounds placement of ship", () => {
-    expect(gameboard.validPlacement(ship, 7, 7, true)).toBe(false);
+    expect(gameboard.isValidPlacement(ship, 7, 7, true)).toBe(false);
   });
   // test overlapping placement
   test("Overlapping placement of ship", () => {
     gameboard.placeShip(ship, 0, 0, true);
-    expect(gameboard.validPlacement(ship, 0, 0, true)).toBe(false);
+    expect(gameboard.isValidPlacement(ship, 0, 0, true)).toBe(false);
   });
 
 });

@@ -32,7 +32,6 @@ describe("Player testing", () => {
     test("Player can place ships randomly", () => {
         player.placeShipsRandomly(playerGameboard);
         expect(playerGameboard.ships.length).toEqual(5);
-
     });
     // check if players can attack enemy
     test("Player can attack enemy", () => {
