@@ -40,7 +40,7 @@ describe("Player testing", () => {
         expect(player.attack(enemyGameboard, 0, 0)).toBe(true);
         // Not sure how this works, will have to check later...
         // Doesn't matter if it's a hit or miss, just that it's shot.
-        expect(enemyGameboard.board[0][0]).toEqual({ hasShip: any(), isShot: true });
+        expect(enemyGameboard.board[0][0]).toEqual({ hasShip: -1||Number, isShot: true });
     });
 
 

@@ -23,10 +23,28 @@ class Gameboard {
             this.board.push(fakeColumnBoard);
         }
     }
+    // Check if ship can be placed.
+    isValidPlacement(ship: Ship, x: number, y: number, horizontal: boolean): boolean{
+        // Check if head of ship is out of bounds or if head of ship has a ship.
+        if (x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip === -1) {
+            return false;
+        }
+        // Horizontal placement checker
+        if (horizontal) {
+            for (let i = 0; i < ship.length; i++) {
+                if (x + i > 9 || x + i < 0 || this.board[x + i][y].hasShip !== -1) {
+                    return false;
+                }
+            }
+        // vertical placement checker
+
+        return true;
+    }
 
     placeShip(ship: Ship, x: number, y: number, horizontal: boolean) {
-        // Check in here if ship can be placed.
         // x and y are numbers between 0 and 9.
+        if(!isValidPlacement(ship, x, y, horizontal)){
+        }
         // first let do horizontal placement.
         if (horizontal) {
         for (let i = 0; i < ship.length; i++) {

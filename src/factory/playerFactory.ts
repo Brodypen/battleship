@@ -23,10 +23,7 @@ class Player {
       
     }
     attack(gameboard: Gameboard, x: number, y: number): boolean {
-        // Check if input is valid.
-        if (x > 10 || x < 0 || y > 10 || y < 0 || gameboard.board[x][y].isShot) {
-            return false;
-        }
+        
         gameboard.receiveAttack(x, y);
         return true;
     }
