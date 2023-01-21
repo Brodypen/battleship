@@ -1,11 +1,12 @@
 // Step 1 TOP
 class Ship {
-  length: number;
-  isSunk: boolean = false;
-  hits: number;
+  private length: number;
+  private isSunk: boolean;
+  private hits: number;
 
   constructor(length: number) {
     this.length = length;
+    this.isSunk = false;
     this.hits = 0;
   }
   hit(): void {
@@ -15,11 +16,14 @@ class Ship {
   checkIsSunk(): boolean {
     return this.hits === this.length;
   }
-  getShipHits(): number {
+  get getShipHits(): number {
     return this.hits;
   }
-  getIsSunk(): boolean {
+  get getIsSunk(): boolean {
     return this.isSunk;
+  }
+  get getLength(): number {
+    return this.length;
   }
 }
 

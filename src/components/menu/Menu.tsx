@@ -1,6 +1,7 @@
 import React from 'react'
+import Gameboard from '../../factory/gameboardFactory'
 // Component for Player Select
-const Menu = () => {
+const Menu = (board: Gameboard) => {
   return (
     <div>
       <div className="p-5 flex flex-col items-center gap-5">

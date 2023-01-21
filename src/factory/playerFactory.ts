@@ -2,11 +2,20 @@ import Gameboard from "./gameboardFactory";
 import { getRandomInt } from "../utils/mathLogic";
 import Ship from "./shipFactory";
 class Player {
-  board: Gameboard;
-  constructor() {
-    this.board = new Gameboard();
-    // Or remember to init gameboard in gameloop.
-    this.board.init();
+  private board: Gameboard;
+  private name: string;
+  constructor(board: Gameboard, name: string) {
+    // this.board = new Gameboard();
+    // // Or remember to init gameboard in gameloop.
+    // this.board.init();
+    this.board = board;
+    this.name = name;
+  }
+  get getBoard(): Gameboard {
+    return this.board;
+  }
+  get getName(): string {
+    return this.name;
   }
   placeShipsRandomly(gameboard: Gameboard) {
     // Place 5 ships randomly on the board.

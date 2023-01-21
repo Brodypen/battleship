@@ -1,12 +1,15 @@
 import React from "react";
 import Menu from "../menu/Menu";
+import Player from "../../factory/playerFactory";
 const Game = () => {
   // 0 = Menu, 1 = (player select), 2 = Game (player turn), 3 = Game (enemy turn)
   const [turn, setTurn] = React.useState(0);
+  const [player, setPlayer] = React.useState<Player>();
 
   const startGame = () => {
     console.log(turn);
     setTurn(1);
+    player?.getBoard.init();
   };
 
   return (
@@ -16,7 +19,7 @@ const Game = () => {
           Play
         </button>
       )}
-      {turn === 1 && <Menu />}
+      {/* {turn === 1 && <Menu board={player?.getBoard} />} */}
     </div>
   );
 };
