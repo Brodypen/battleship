@@ -25,14 +25,14 @@ class Player {
     let x = 0;
     let y = 0;
     let ifHorizontal = false;
-    while (i < 5) {
+    while (i < 1) {
       // place Ships randomly on board, vertically or horizontally.
       x = getRandomInt(10);
       y = getRandomInt(10);
       ifHorizontal = getRandomInt(2) === 0;
       if (
-        gameboard.isValidPlacement(new Ship(3), x, y, ifHorizontal) &&
-        i === 4
+        i === 4 &&
+        gameboard.isValidPlacement(new Ship(3), x, y, ifHorizontal)
       ) {
         gameboard.placeShip(new Ship(3), x, y, ifHorizontal);
         i++;
@@ -40,11 +40,11 @@ class Player {
       } else if (
         gameboard.isValidPlacement(new Ship(i + 2), x, y, ifHorizontal)
       ) {
+        console.log("Placing ship at", x, y, "horizontal:", ifHorizontal);
         gameboard.placeShip(new Ship(i + 2), x, y, ifHorizontal);
         i++;
         continue;
       }
-      
     }
   }
   attack(gameboard: Gameboard, x: number, y: number): boolean {

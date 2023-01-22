@@ -11,15 +11,19 @@ class Gameboard {
   constructor() {
     this.board = [];
     this.ships = [];
+    this.init();
   }
   init() {
-    let fakeColumnBoard: IGameboard[] = [];
-    for (let i = 0; i < 10; i++) {
-      fakeColumnBoard.push({ hasShip: -1, isShot: false });
-    }
-    for (let i = 0; i < 10; i++) {
-      this.board.push(fakeColumnBoard);
-    }
+    // This was causing a bug, the board was being initialized with the same object!
+    // let fakeColumnBoard: IGameboard[] = [];
+    // for (let i = 0; i < 10; i++) {
+    //   fakeColumnBoard.push({ hasShip: -1, isShot: false });
+    // }
+    // for (let i = 0; i < 10; i++) {
+    //   this.board.push(fakeColumnBoard);
+    // }
+    // This is the correct way to initialize the board. Let's go!
+    this.board = [...Array(10)].map(e => Array(10).fill({ hasShip: -1, isShot: false }));
   }
   // Check if ship can be placed.
   isValidPlacement(
@@ -61,13 +65,17 @@ class Gameboard {
     //     return;
     // }
     // first let do horizontal placement.
+    console.log("Placing ship at heh ", x, y, "horizontal:", horizontal);
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
+        console.log("Placing ship at hehe ", x + i, y, "horizontal:", horizontal);
         this.board[x + i][y] = { hasShip: this.ships.length, isShot: false };
       }
     } else {
+      
       for (let i = 0; i < ship.getLength; i++) {
-        this.board[x][y + i] = { hasShip: this.ships.length, isShot: false };
+        console.log("Placing ship at heheh ", x, y+i, "horizontal:", horizontal);
+        this.board[x][y+i] = { hasShip: this.ships.length, isShot: false };
       }
     }
     this.ships.push(ship);
@@ -94,6 +102,9 @@ class Gameboard {
   }
   get getShips(): Ship[] {
     return this.ships;
+  }
+  getCordValue(x: number, y: number): IGameboard {
+    return this.board[x][y];
   }
 }
 

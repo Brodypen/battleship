@@ -6,10 +6,15 @@ class GameController {
     private playerTwo: Player;
     private turn: number;
 
-    constructor() {
+    constructor(turn: number) {
         this.playerOne = new Player(new Gameboard(), "Player One");
         this.playerTwo = new Player(new Gameboard(), "Player Two");
-        this.turn = 0;
+        this.turn = turn;
+    }
+    init(): void {
+        console.log("heyo");
+        this.playerOne.placeShipsRandomly(this.playerOne.getPlayerBoard);
+        // this.playerTwo.placeShipsRandomly(this.playerTwo.getPlayerBoard);
     }
     get getPlayerOne(): Player {
         return this.playerOne;
@@ -19,6 +24,9 @@ class GameController {
     }
     get getTurn(): number {
         return this.turn;
+    }
+    setTurn(turn: number) {
+        this.turn = turn;
     }
 
 }
