@@ -11,7 +11,7 @@ class Player {
     this.board = board;
     this.name = name;
   }
-  get getBoard(): Gameboard {
+  get getPlayerBoard(): Gameboard {
     return this.board;
   }
   get getName(): string {

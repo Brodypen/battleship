@@ -7,10 +7,10 @@ describe("Player testing", () => {
     let enemyGameboard: Gameboard;
 
     beforeEach(() => {
-        player = new Player();
         playerGameboard = new Gameboard();
-        enemy = new Player();
         enemyGameboard = new Gameboard();
+        player = new Player(playerGameboard, "Player");
+        enemy = new Player(enemyGameboard, "Enemy");
         playerGameboard.init();
         enemyGameboard.init();
         // enemy.placeShipsRandomly(enemyGameboard);
@@ -31,7 +31,7 @@ describe("Player testing", () => {
     // check if players can choose random place for ships
     test("Player can place ships randomly", () => {
         player.placeShipsRandomly(playerGameboard);
-        expect(playerGameboard.ships.length).toEqual(5);
+        expect(playerGameboard.getShips.length).toEqual(5);
     });
     // check if players can attack enemy
     test("Player can attack enemy", () => {
@@ -39,7 +39,7 @@ describe("Player testing", () => {
         expect(player.attack(enemyGameboard, 0, 0)).toBe(true);
         // Not sure how this works, will have to check later...
         // Doesn't matter if it's a hit or miss, just that it's shot.
-        expect(enemyGameboard.board[0][0]).toEqual({ hasShip: -1||Number, isShot: true });
+        expect(enemyGameboard.getBoard[0][0]).toEqual({ hasShip: -1||Number, isShot: true });
     });
 
 

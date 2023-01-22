@@ -1,7 +1,11 @@
 import React from 'react'
 import Gameboard from '../../factory/gameboardFactory'
+interface GameProps{
+  playerBoard: Gameboard
+}
 // Component for Player Select
-const Menu = (board: Gameboard) => {
+const Menu = ({playerBoard}: GameProps) => {
+  console.log("hello");
   return (
     <div>
       <div className="p-5 flex flex-col items-center gap-5">
