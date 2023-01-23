@@ -12,9 +12,8 @@ class GameController {
         this.turn = turn;
     }
     init(): void {
-        console.log("heyo");
         this.playerOne.placeShipsRandomly(this.playerOne.getPlayerBoard);
-        // this.playerTwo.placeShipsRandomly(this.playerTwo.getPlayerBoard);
+        this.playerTwo.placeShipsRandomly(this.playerTwo.getPlayerBoard);
     }
     get getPlayerOne(): Player {
         return this.playerOne;

@@ -25,7 +25,7 @@ class Player {
     let x = 0;
     let y = 0;
     let ifHorizontal = false;
-    while (i < 1) {
+    while (i < 5) {
       // place Ships randomly on board, vertically or horizontally.
       x = getRandomInt(10);
       y = getRandomInt(10);
@@ -40,7 +40,6 @@ class Player {
       } else if (
         gameboard.isValidPlacement(new Ship(i + 2), x, y, ifHorizontal)
       ) {
-        console.log("Placing ship at", x, y, "horizontal:", ifHorizontal);
         gameboard.placeShip(new Ship(i + 2), x, y, ifHorizontal);
         i++;
         continue;

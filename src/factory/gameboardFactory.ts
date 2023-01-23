@@ -65,16 +65,13 @@ class Gameboard {
     //     return;
     // }
     // first let do horizontal placement.
-    console.log("Placing ship at heh ", x, y, "horizontal:", horizontal);
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
-        console.log("Placing ship at hehe ", x + i, y, "horizontal:", horizontal);
         this.board[x + i][y] = { hasShip: this.ships.length, isShot: false };
       }
     } else {
       
       for (let i = 0; i < ship.getLength; i++) {
-        console.log("Placing ship at heheh ", x, y+i, "horizontal:", horizontal);
         this.board[x][y+i] = { hasShip: this.ships.length, isShot: false };
       }
     }
