@@ -1,21 +1,23 @@
-import React from 'react'
-import PlayerBoardGUI from '../gameWindow/PlayerBoardGUI'
-import GameController from '../../factory/GameController'
-interface GameProps{
-  playerGameController: GameController
+import React from "react";
+import PlayerBoardGUI from "../gameWindow/PlayerBoardGUI";
+import GameController from "../../factory/GameController";
+interface GameProps {
+  playerGameController: GameController;
 }
 // ! Todo: Add a button to randomize the board again, Click once to rotate. Click and drag to move individual ships.
 // Component for Player Select
-const Menu = ({playerGameController}: GameProps) => {
-  
-  const [playerBoard, setPlayerBoard] = React.useState(playerGameController.getPlayerOne.getPlayerBoard)
-  const [playerBoardIsCorrect, setPlayerBoardIsOkay] = React.useState(true)
+const Menu = ({ playerGameController }: GameProps) => {
+  const [playerBoard, setPlayerBoard] = React.useState(
+    playerGameController.getPlayerOne.getPlayerBoard
+  );
+  const [playerBoardIsCorrect, setPlayerBoardIsOkay] = React.useState(true);
 
   const randomizeBoard = () => {
-    playerGameController.getPlayerOne.placeShipsRandomly(
-      playerGameController.getPlayerOne.getPlayerBoard
-    );
-    setPlayerBoard(playerGameController.getPlayerOne.getPlayerBoard);
+    // const obj1 = Object.assign({}, playerGameController);
+    // console.log(obj1)
+    // obj1.getPlayerOne.placeShipsRandomly(obj1.getPlayerOne.getPlayerBoard);
+
+    setPlayerBoard(obj1.getPlayerOne.getPlayerBoard);
   };
   return (
     <div className="p-5 flex flex-col items-center gap-5">
@@ -30,7 +32,10 @@ const Menu = ({playerGameController}: GameProps) => {
 
       <PlayerBoardGUI playerBoard={playerBoard} />
       <div className="flex gap-5">
-        <button className="bg-blue-500 hover:bg-blue-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-blue-700 hover:border-blue-500 rounded" onClick={randomizeBoard}>
+        <button
+          className="bg-blue-500 hover:bg-blue-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          onClick={randomizeBoard}
+        >
           Randomize
         </button>
         <button className="bg-red-500 hover:bg-red-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-red-700 hover:border-red-500 rounded">
@@ -39,6 +44,6 @@ const Menu = ({playerGameController}: GameProps) => {
       </div>
     </div>
   );
-}
+};
 
-export default Menu
+export default Menu;
