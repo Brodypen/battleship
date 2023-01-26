@@ -4,6 +4,7 @@ import PlayerBoardGUI from '../gameWindow/PlayerBoardGUI'
 interface GameProps{
   playerBoard: Gameboard
 }
+// ! Todo: Add a button to randomize the board again, Click once to rotate. Click and drag to move individual ships.
 // Component for Player Select
 const Menu = ({playerBoard}: GameProps) => {
   const [playerBoardIsCorrect, setPlayerBoardIsOkay] = React.useState(true)
