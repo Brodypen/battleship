@@ -103,6 +103,10 @@ class Gameboard {
   getCordValue(x: number, y: number): IGameboard {
     return this.board[x][y];
   }
+  cleanBoard(){
+    this.init();
+    this.ships = [];
+  }
 }
 
 export default Gameboard;

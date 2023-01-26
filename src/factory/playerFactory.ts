@@ -21,6 +21,7 @@ class Player {
     // Place 5 ships randomly on the board.
     // index of ship = length of ship
     // 0 = 2, 1 = 3, 2 = 4, 3 = 5, 4 = 3:
+    this.board.cleanBoard();
     let i = 0;
     let x = 0;
     let y = 0;
