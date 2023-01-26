@@ -8,8 +8,9 @@ const Game = () => {
   // 0 = Menu, 1 = (player select), 2 = Game (player turn), 3 = Game (enemy turn)
   // Move this logic to GameController
   // const [turn, setTurn] = React.useState(0);
-  const [gameController, setGameController] = React.useState<GameController>(
-    new GameController(0)
+  // Neat, only run this once.
+  const [gameController, setGameController] = React.useState<GameController>(() =>{
+    return new GameController(0)}
   );
   const [turn, setTurn] = React.useState(0);
 
