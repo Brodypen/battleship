@@ -16,8 +16,7 @@ const Menu = ({ playerGameController }: GameProps) => {
     // const obj1 = Object.assign({}, playerGameController);
     // console.log(obj1)
     // obj1.getPlayerOne.placeShipsRandomly(obj1.getPlayerOne.getPlayerBoard);
-
-    setPlayerBoard(obj1.getPlayerOne.getPlayerBoard);
+    // setPlayerBoard(obj1.getPlayerOne.getPlayerBoard);
   };
   return (
     <div className="p-5 flex flex-col items-center gap-5">
