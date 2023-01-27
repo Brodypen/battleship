@@ -33,15 +33,15 @@ class Player {
       ifHorizontal = getRandomInt(2) === 0;
       if (
         i === 4 &&
-        gameboard.isValidPlacement(new Ship(3), x, y, ifHorizontal)
+        gameboard.isValidPlacement(new Ship(3, ifHorizontal), x, y)
       ) {
-        gameboard.placeShip(new Ship(3), x, y, ifHorizontal);
+        gameboard.placeShip(new Ship(3, ifHorizontal), x, y);
         i++;
         continue;
       } else if (
-        gameboard.isValidPlacement(new Ship(i + 2), x, y, ifHorizontal)
+        gameboard.isValidPlacement(new Ship(i + 2, ifHorizontal), x, y)
       ) {
-        gameboard.placeShip(new Ship(i + 2), x, y, ifHorizontal);
+        gameboard.placeShip(new Ship(i + 2, ifHorizontal), x, y);
         i++;
         continue;
       }

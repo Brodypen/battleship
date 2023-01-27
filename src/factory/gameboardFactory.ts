@@ -7,7 +7,7 @@ class Gameboard {
   // isShot == true && hasShip == -1 = missed shot
   // 0,0 is top left corner, 9,9 is top right corner.
   private board: IGameboard[][];
-  private ships: Ship[];
+  private ships:  Ship[];
   constructor() {
     this.board = [];
     this.ships = [];
@@ -30,8 +30,8 @@ class Gameboard {
     ship: Ship,
     x: number,
     y: number,
-    horizontal: boolean
   ): boolean {
+    const horizontal = ship.getIsHorizontal;
     // Check if head of ship is out of bounds or if head of ship has a ship.
     if (x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip !== -1) {
       return false;
@@ -58,25 +58,45 @@ class Gameboard {
     return true;
   }
 
-  placeShip(ship: Ship, x: number, y: number, horizontal: boolean) {
+  placeShip(ship: Ship, x: number, y: number) {
     // x and y are numbers between 0 and 9.
     // Remember to check if ship can be placed! Not in here.
     // if (!this.isValidPlacement(ship, x, y, horizontal)) {
     //     return;
     // }
-    // first let do horizontal placement.
+    const horizontal = ship.getIsHorizontal;
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
         this.board[x + i][y] = { hasShip: this.ships.length, isShot: false };
       }
     } else {
-      
       for (let i = 0; i < ship.getLength; i++) {
         this.board[x][y+i] = { hasShip: this.ships.length, isShot: false };
       }
     }
+    ship.setShipHead = [x, y];
+    if(this.ships.includes(ship)){
+      return;
+    }
     this.ships.push(ship);
   }
+  relocateShip(ship: Ship, x: number, y: number) {
+    const horizontal = ship.getIsHorizontal;
+    const oldHead = ship.getShipHead;
+    if (horizontal) {
+      for (let i = 0; i < ship.getLength; i++) {
+        this.board[oldHead[0] + i][oldHead[1]] = { hasShip: -1, isShot: false };
+        this.board[x + i][y] = { hasShip: this.ships.indexOf(ship), isShot: false };
+      }
+    } else {
+      for (let i = 0; i < ship.getLength; i++) {
+        this.board[oldHead[0]][oldHead[1] + i] = { hasShip: -1, isShot: false };
+        this.board[x][y + i] = { hasShip: this.ships.indexOf(ship), isShot: false };
+      }
+    }
+    ship.setShipHead = [x, y];
+  }
+
   receiveAttack(x: number, y: number) {
     if (this.board[x][y].hasShip !== -1) {
       this.board[x][y].isShot = true;

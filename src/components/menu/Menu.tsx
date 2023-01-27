@@ -7,16 +7,13 @@ interface GameProps {
 // ! Todo: Add a button to randomize the board again, Click once to rotate. Click and drag to move individual ships.
 // Component for Player Select
 const Menu = ({ playerGameController }: GameProps) => {
-  const [playerBoard, setPlayerBoard] = React.useState(
-    playerGameController.getPlayerOne.getPlayerBoard
-  );
+  const [reloadBoard, boardToReload] = React.useState(false);
   const [playerBoardIsCorrect, setPlayerBoardIsOkay] = React.useState(true);
 
   const randomizeBoard = () => {
-    // const obj1 = Object.assign({}, playerGameController);
-    // console.log(obj1)
-    // obj1.getPlayerOne.placeShipsRandomly(obj1.getPlayerOne.getPlayerBoard);
-    // setPlayerBoard(obj1.getPlayerOne.getPlayerBoard);
+    playerGameController.getPlayerOne.placeShipsRandomly(playerGameController.getPlayerOne.getPlayerBoard);
+    // Not good practice.
+    boardToReload(!reloadBoard);
   };
   return (
     <div className="p-5 flex flex-col items-center gap-5">
@@ -29,7 +26,7 @@ const Menu = ({ playerGameController }: GameProps) => {
         {playerBoardIsCorrect ? "Click to rearrange your ships!" : ""}
       </p>
 
-      <PlayerBoardGUI playerBoard={playerBoard} />
+      <PlayerBoardGUI playerBoard={playerGameController.getPlayerOne.getPlayerBoard} />
       <div className="flex gap-5">
         <button
           className="bg-blue-500 hover:bg-blue-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-blue-700 hover:border-blue-500 rounded"

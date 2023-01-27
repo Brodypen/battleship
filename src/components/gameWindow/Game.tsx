@@ -18,7 +18,7 @@ const Game = () => {
     gameController.setTurn(1);
     setTurn(gameController.getTurn);
     gameController.init();
-    // console.log(gameController.getPlayerOne.getPlayerBoard.getBoard);
+
     console.log(gameController.getPlayerOne.getPlayerBoard);
   };
 
