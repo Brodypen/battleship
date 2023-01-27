@@ -8,7 +8,6 @@ interface GameProps {
 // Component for Player Select
 const Menu = ({ playerGameController }: GameProps) => {
   const [reloadBoard, boardToReload] = React.useState(false);
-  const [playerBoardIsCorrect, setPlayerBoardIsOkay] = React.useState(true);
 
   const randomizeBoard = () => {
     playerGameController.getPlayerOne.placeShipsRandomly(playerGameController.getPlayerOne.getPlayerBoard);
@@ -18,13 +17,6 @@ const Menu = ({ playerGameController }: GameProps) => {
   return (
     <div className="p-5 flex flex-col items-center gap-5">
       <p className="font-mono text-2xl">Howdy Player One!</p>
-      <p
-        className={`font-mono text-2xl ${
-          playerBoardIsCorrect ? "" : "text-red-300"
-        }`}
-      >
-        {playerBoardIsCorrect ? "Click to rearrange your ships!" : ""}
-      </p>
 
       <PlayerBoardGUI playerBoard={playerGameController.getPlayerOne.getPlayerBoard} />
       <div className="flex gap-5">
