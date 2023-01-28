@@ -35,6 +35,9 @@ class Ship {
   set setIsHorizontal(isHorizontal: boolean) {
     this.isHorizontal = isHorizontal;
   }
+  rotateShip(): void {
+    this.isHorizontal = !this.isHorizontal;
+  }
   get getShipHead(): number[] {
     return this.shipHead;
   }

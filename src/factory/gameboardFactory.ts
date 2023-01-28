@@ -32,23 +32,27 @@ class Gameboard {
     y: number,
   ): boolean {
     const horizontal = ship.getIsHorizontal;
-    // Check if head of ship is out of bounds or if head of ship has a ship.
-    if (x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip !== -1) {
+    const shipNumber = this.board[x][y].hasShip;
+    const arr = [-1, shipNumber];
+    console.log("x: ", x, "y: ", y);
+    console.log("shipNumber: ", shipNumber);
+    console.log(arr.indexOf(shipNumber));
+    if(x > 9 || x < 0 || y > 9 || y < 0 || (arr.indexOf(shipNumber) === -1)) {
       return false;
     }
     // Horizontal placement checker
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
         // refactor do not need to check left, only right since horizontal goes left to right.
-        if (x + i > 9 || this.board[x + i][y].hasShip !== -1) {
+        if (x + i > 9 || (arr.indexOf(this.board[x + i][y].hasShip) === -1)) {
           return false;
         }
       }
     } else {
         for (let i = 0; i < ship.getLength; i++) {
             // refactor do not need to check up, only down since vertical goes up to down.
-            if (y + i > 9 || this.board[x][y + i].hasShip !== -1) {
-            return false;
+            if (y + i > 9 || arr.indexOf(this.board[x + i][y].hasShip) === -1) {
+              return false;
             }
         }
     }
@@ -81,12 +85,22 @@ class Gameboard {
     this.ships.push(ship);
   }
   relocateShip(ship: Ship, x: number, y: number) {
+    console.log("Hey im gonna relocate ship ", ship.getLength, " to ", x, y);
     const horizontal = ship.getIsHorizontal;
     const oldHead = ship.getShipHead;
+    
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
-        this.board[oldHead[0] + i][oldHead[1]] = { hasShip: -1, isShot: false };
-        this.board[x + i][y] = { hasShip: this.ships.indexOf(ship), isShot: false };
+         this.board[oldHead[0] + i][oldHead[1]] = {
+           hasShip: -1,
+           isShot: false,
+         };
+      }
+      for (let i = 0; i < ship.getLength; i++) {
+           this.board[x + i][y] = {
+           hasShip: this.ships.indexOf(ship),
+           isShot: false,
+         };
       }
     } else {
       for (let i = 0; i < ship.getLength; i++) {

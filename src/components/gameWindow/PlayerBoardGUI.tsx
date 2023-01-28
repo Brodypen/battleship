@@ -39,11 +39,20 @@ const PlayerBoardGUI = ({ playerBoard }: GameProps) => {
         Col
       ) === false
     ) {
-      if (
-        JSON.stringify([x, y]) ===
-        JSON.stringify([Row, Col])
-      ) {
-        setDisplayWords("Rotating Ship!");
+      if (JSON.stringify([x, y]) === JSON.stringify([Row, Col])) {
+        // add logic to rotate ship.
+        playerBoard.getShips[shipToMove].rotateShip();
+        if (
+          playerBoard.isValidPlacement(
+            playerBoard.getShips[shipToMove],
+            Row,
+            Col
+          ) === true
+        ) {
+          playerBoard.relocateShip(playerBoard.getShips[shipToMove], Row, Col);
+          setShipToMove(-1);
+          setDisplayWords("Rotating Ship!");
+        }
       } else {
         setDisplayWords("Invalid Placement!");
       }
