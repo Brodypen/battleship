@@ -1,5 +1,5 @@
 import Ship from "./shipFactory";
-import {IGameboard} from "../utils/types";
+import { IGameboard } from "../utils/types";
 class Gameboard {
   // Logic of the board is to have a object matrix
   // hasShip -1 = no ship, 0-4 = what ship number
@@ -7,7 +7,7 @@ class Gameboard {
   // isShot == true && hasShip == -1 = missed shot
   // 0,0 is top left corner, 9,9 is top right corner.
   private board: IGameboard[][];
-  private ships:  Ship[];
+  private ships: Ship[];
   constructor() {
     this.board = [];
     this.ships = [];
@@ -23,14 +23,18 @@ class Gameboard {
     //   this.board.push(fakeColumnBoard);
     // }
     // This is the correct way to initialize the board. Let's go!
-    this.board = [...Array(10)].map(e => Array(10).fill({ hasShip: -1, isShot: false }));
+    // for(let i = 0; i < 5; i++) {
+    //   // this.board.push(new Array(10).fill().map(() => ({ hasShip: -1, isShot: false })));
+    //   new Array(10).fill(0).map(() => ({ hasShip: -1, isShot: false }));
+    // }
+    this.board = [...Array(10)].map(() =>
+      Array(10)
+        .fill(0)
+        .map(() => ({ hasShip: -1, isShot: false }))
+    );
   }
   // Check if ship can be placed.
-  isValidPlacement(
-    ship: Ship,
-    x: number,
-    y: number,
-  ): boolean {
+  isValidPlacement(ship: Ship, x: number, y: number): boolean {
     const horizontal = ship.getIsHorizontal;
     const shipNumber = this.board[x][y].hasShip;
     const arr = [-1, shipNumber];
@@ -38,7 +42,7 @@ class Gameboard {
     console.log("shipNumber: ", shipNumber);
     console.log(arr.indexOf(shipNumber));
     //(arr.indexOf(shipNumber) === -1)
-    if(x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip !== -1) {
+    if (x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip !== -1) {
       return false;
     }
     // Horizontal placement checker
@@ -46,18 +50,18 @@ class Gameboard {
       for (let i = 0; i < ship.getLength; i++) {
         // refactor do not need to check left, only right since horizontal goes left to right.
         //(arr.indexOf(this.board[x + i][y].hasShip) === -1)
-        if (x + i > 9 || this.board[x+i][y].hasShip !== -1) {
+        if (x + i > 9 || this.board[x + i][y].hasShip !== -1) {
           return false;
         }
       }
     } else {
-        for (let i = 0; i < ship.getLength; i++) {
-            // refactor do not need to check up, only down since vertical goes up to down.
-            //arr.indexOf(this.board[x][y+1].hasShip) === -1
-            if (y + i > 9 || this.board[x][y+i].hasShip !== -1) {
-              return false;
-            }
+      for (let i = 0; i < ship.getLength; i++) {
+        // refactor do not need to check up, only down since vertical goes up to down.
+        //arr.indexOf(this.board[x][y+1].hasShip) === -1
+        if (y + i > 9 || this.board[x][y + i].hasShip !== -1) {
+          return false;
         }
+      }
     }
 
     // vertical placement checker
@@ -78,11 +82,11 @@ class Gameboard {
       }
     } else {
       for (let i = 0; i < ship.getLength; i++) {
-        this.board[x][y+i] = { hasShip: this.ships.length, isShot: false };
+        this.board[x][y + i] = { hasShip: this.ships.length, isShot: false };
       }
     }
     ship.setShipHead = [x, y];
-    if(this.ships.includes(ship)){
+    if (this.ships.includes(ship)) {
       return;
     }
     this.ships.push(ship);
@@ -91,24 +95,27 @@ class Gameboard {
     console.log("Hey im gonna relocate ship ", ship.getLength, " to ", x, y);
     const horizontal = ship.getIsHorizontal;
     const oldHead = ship.getShipHead;
-    
+
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
-         this.board[oldHead[0] + i][oldHead[1]] = {
-           hasShip: -1,
-           isShot: false,
-         };
+        this.board[oldHead[0] + i][oldHead[1]] = {
+          hasShip: -1,
+          isShot: false,
+        };
       }
       for (let i = 0; i < ship.getLength; i++) {
-           this.board[x + i][y] = {
-           hasShip: this.ships.indexOf(ship),
-           isShot: false,
-         };
+        this.board[x + i][y] = {
+          hasShip: this.ships.indexOf(ship),
+          isShot: false,
+        };
       }
     } else {
       for (let i = 0; i < ship.getLength; i++) {
         this.board[oldHead[0]][oldHead[1] + i] = { hasShip: -1, isShot: false };
-        this.board[x][y + i] = { hasShip: this.ships.indexOf(ship), isShot: false };
+        this.board[x][y + i] = {
+          hasShip: this.ships.indexOf(ship),
+          isShot: false,
+        };
       }
     }
     ship.setShipHead = [x, y];
@@ -116,10 +123,10 @@ class Gameboard {
 
   receiveAttack(x: number, y: number) {
     if (this.board[x][y].hasShip !== -1) {
-      this.board[x][y].isShot = true;
+      this.board[x][y]["isShot"] = true;
       this.ships[this.board[x][y].hasShip].hit();
     } else {
-      this.board[x][y].isShot = true;
+      this.board[x][y]["isShot"] = true;
     }
   }
 
@@ -140,7 +147,7 @@ class Gameboard {
   getCordValue(x: number, y: number): IGameboard {
     return this.board[x][y];
   }
-  cleanBoard(){
+  cleanBoard() {
     this.init();
     this.ships = [];
   }

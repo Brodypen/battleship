@@ -4,6 +4,7 @@ import Player from "../../factory/playerFactory";
 import Gameboard from "../../factory/gameboardFactory";
 import GameController from "../../factory/GameController";
 import { inherits } from "util";
+import BattlePage from "../battlePage/BattlePage";
 const Game = () => {
   // 0 = Menu, 1 = (player select), 2 = Game (player turn), 3 = Game (enemy turn)
   // Move this logic to GameController
@@ -21,6 +22,10 @@ const Game = () => {
 
     console.log(gameController.getPlayerOne.getPlayerBoard);
   };
+  const startBattle = () => {
+    gameController.setTurn(2);
+    setTurn(gameController.getTurn);
+  };
 
   return (
     <div className="text-white flex justify-center">
@@ -33,11 +38,8 @@ const Game = () => {
         </button>
       )}
 
-      {turn === 1 && (
-        <Menu
-          playerGameController={gameController}
-        />
-      )}
+      {turn === 1 && <Menu playerGameController={gameController} startBattleOnClick={startBattle} />}
+      {turn === 2 && <BattlePage playerGameController={gameController}/>}
     </div>
   );
 };

@@ -3,10 +3,11 @@ import PlayerBoardGUI from "../gameWindow/PlayerBoardGUI";
 import GameController from "../../factory/GameController";
 interface GameProps {
   playerGameController: GameController;
+  startBattleOnClick: () => void;
 }
 // ! Todo: Add a button to randomize the board again, Click once to rotate. Click and drag to move individual ships.
 // Component for Player Select
-const Menu = ({ playerGameController }: GameProps) => {
+const Menu = ({ playerGameController, startBattleOnClick }: GameProps) => {
   const [reloadBoard, boardToReload] = React.useState(false);
 
   const randomizeBoard = () => {
@@ -26,7 +27,7 @@ const Menu = ({ playerGameController }: GameProps) => {
         >
           Randomize
         </button>
-        <button className="bg-red-500 hover:bg-red-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-red-700 hover:border-red-500 rounded">
+        <button className="bg-red-500 hover:bg-red-400 text-white text-2xl font-bold py-6 px-12 border-b-4 border-red-700 hover:border-red-500 rounded" onClick={startBattleOnClick}>
           Battle!
         </button>
       </div>
