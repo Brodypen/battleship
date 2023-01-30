@@ -37,21 +37,24 @@ class Gameboard {
     console.log("x: ", x, "y: ", y);
     console.log("shipNumber: ", shipNumber);
     console.log(arr.indexOf(shipNumber));
-    if(x > 9 || x < 0 || y > 9 || y < 0 || (arr.indexOf(shipNumber) === -1)) {
+    //(arr.indexOf(shipNumber) === -1)
+    if(x > 9 || x < 0 || y > 9 || y < 0 || this.board[x][y].hasShip !== -1) {
       return false;
     }
     // Horizontal placement checker
     if (horizontal) {
       for (let i = 0; i < ship.getLength; i++) {
         // refactor do not need to check left, only right since horizontal goes left to right.
-        if (x + i > 9 || (arr.indexOf(this.board[x + i][y].hasShip) === -1)) {
+        //(arr.indexOf(this.board[x + i][y].hasShip) === -1)
+        if (x + i > 9 || this.board[x+i][y].hasShip !== -1) {
           return false;
         }
       }
     } else {
         for (let i = 0; i < ship.getLength; i++) {
             // refactor do not need to check up, only down since vertical goes up to down.
-            if (y + i > 9 || arr.indexOf(this.board[x + i][y].hasShip) === -1) {
+            //arr.indexOf(this.board[x][y+1].hasShip) === -1
+            if (y + i > 9 || this.board[x][y+i].hasShip !== -1) {
               return false;
             }
         }
