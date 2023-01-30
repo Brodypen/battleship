@@ -25,12 +25,12 @@ const PlayerBoardDIS = ({
                 colIndex // Map through each column
               ) => (
                 <div
-                  className={`bg-slate-100 w-10 h-10 border border-slate-700 hover:bg-slate-400
+                  className={`bg-slate-100 w-10 h-10 border border-slate-700 hover:bg-slate-400 ${playerBoard.getBoard[rowIndex][colIndex].isShot && playerBoard.getBoard[rowIndex][colIndex].hasShip !== -1 ? "border-8 border-red-500" : playerBoard.getBoard[rowIndex][colIndex].isShot ? "border-8 border-slate-500" : ""}
                         ${
                           playerBoard.getBoard[rowIndex][colIndex].hasShip === -1 || shipToMove ===
                           -2
                             ? `bg-slate-100`
-                            : playerBoard.getBoard[rowIndex][colIndex].isShot  ? 'border-red-400 border-8' : shipToMove &&
+                            :  shipToMove &&
                               playerBoard.getBoard[rowIndex][colIndex]
                                 .hasShip === shipToMove &&
                               rowIndex ===

@@ -8,6 +8,7 @@ const BattlePage = ({playerGameController}: GameProps) => {
     const [playerTurn, setPlayerTurn] = React.useState(true);
     const [displayInstructions, setDisplayInstructions] = React.useState("Pick a spot to attack!");
     const [gameOver, setGameOver] = React.useState(false);
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
     const onAttack = (Row: number, Col: number) => {
         console.log("HEYO!", Row, Col);
@@ -17,6 +18,13 @@ const BattlePage = ({playerGameController}: GameProps) => {
             console.log(playerGameController.getPlayerTwo.getPlayerBoard);
             setPlayerTurn(false);
             setDisplayInstructions("Player Two's Turn!");
+            sleep(1000).then(() => {setDisplayInstructions("Player One's Turn!");});
+            //  playerGameController.getPlayerTwo.attack(
+            //    playerGameController.getPlayerOne.getPlayerBoard,
+            //    Row,
+            //    Col
+            //  );
+             
         }
         // } else {
         //     playerGameController.getPlayerOne.receiveAttack(Row, Col);
