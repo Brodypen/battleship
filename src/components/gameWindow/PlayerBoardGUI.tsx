@@ -42,7 +42,7 @@ const PlayerBoardGUI = ({ playerBoard }: GameProps) => {
     ) {
       if (JSON.stringify([x, y]) === JSON.stringify([Row, Col])) {
         // add logic to rotate ship.
-        playerBoard.getShips[shipToMove].rotateShip();
+        // playerBoard.getShips[shipToMove].rotateShip();
         if (
           playerBoard.isValidPlacement(
             playerBoard.getShips[shipToMove],
