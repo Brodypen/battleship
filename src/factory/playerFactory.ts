@@ -48,6 +48,16 @@ class Player {
     }
   }
   attack(gameboard: Gameboard, x: number, y: number): boolean {
+    // Check if the attack is valid.
+    if (x > 9 || x < 0 || y > 9 || y < 0) {
+      return false;
+    }
+    // Check if the attack has already been made.
+    if (gameboard.getBoard[x][y].isShot) {
+      return false;
+    }
+    // Attack the gameboard.
+    
     gameboard.receiveAttack(x, y);
     return true;
   }
